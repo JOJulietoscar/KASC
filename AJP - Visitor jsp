@@ -1,0 +1,8 @@
+jsp
+<%
+Integer count = (Integer)application.getAttribute("visitors");
+if(count == null) count = 0;
+count++;
+application.setAttribute("visitors", count);
+%>
+<h2>Visitor Count: <%= count %></h2>
