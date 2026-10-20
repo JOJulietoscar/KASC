@@ -1,0 +1,65 @@
+login.html
+
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <form action="LoginServlet" method="POST">
+        Username:
+        <input type="text" name="username" required><br><br>
+        Password:
+        <input type="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+
+LoginServlet.java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class LoginServlet extends HttpServlet {
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response)
+                       throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        String user = request.getParameter("username");
+        String passw = request.getParameter("password");
+
+        if ("admin@1234".equals(passw)) {
+            out.println("<h2>Login Successful</h2>");
+            out.println("<h2>Welcome " + user + "</h2>");
+        } else {
+            out.println("<h2>Invalid Password</h2>");
+        }
+
+        out.close();
+    }
+}
+
+web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         version="2.5">
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+
+
