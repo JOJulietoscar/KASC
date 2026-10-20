@@ -1,0 +1,58 @@
+server.java
+
+
+import java.io.*;
+import java.net.*;
+
+public class Server {
+    public static void main(String[] args) throws Exception {
+        ServerSocket serverSocket = new ServerSocket(6789);
+
+        System.out.println("Server started...");
+        System.out.println("Waiting for client connection...");
+
+        Socket serverEnd = serverSocket.accept();
+        System.out.println("Client connected!");
+
+        BufferedReader fromClient = new BufferedReader(
+            new InputStreamReader(serverEnd.getInputStream()));
+
+        PrintWriter toClient = new PrintWriter(
+            serverEnd.getOutputStream(), true);
+
+        String clientMessage = fromClient.readLine();
+        System.out.println("Client: " + clientMessage);
+
+        toClient.println("Hello Client! Message received by Server.");
+
+        serverEnd.close();
+        serverSocket.close();
+    }
+}
+
+
+
+Client.java
+
+
+import java.io.*;
+import java.net.*;
+
+public class Client {
+    public static void main(String[] args) throws Exception {
+        Socket clientEnd = new Socket("localhost", 6789);
+
+        BufferedReader fromServer = new BufferedReader(
+            new InputStreamReader(clientEnd.getInputStream()));
+
+        PrintWriter toServer = new PrintWriter(
+            clientEnd.getOutputStream(), true);
+
+        toServer.println("Hello Server! This is a message from Client.");
+
+        String serverMessage = fromServer.readLine();
+        System.out.println("Server: " + serverMessage);
+
+        clientEnd.close();
+    }
+}
