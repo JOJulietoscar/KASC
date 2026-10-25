@@ -10,51 +10,51 @@ import java.awt.event.*;
 public class CalculatorApplet extends Applet implements ActionListener{
     TextField t1,t2;
     Label result;
-    Button add,sub,mul,div;
+    Button b1,b2,b3,b4;
 
     public void init()
     {
-        Label l1 = new Label("First number:");
+        add (new Label("First number:"));
         t1 = new TextField();
-        add(l1); add(t1);
+        add(t1);
 
-        Label l2 = new Label("Second number:");
+        add (new Label("Second number:"));
         t2 = new TextField();
-        add(l2); add(t2);
+        add(t2);
 
-        add = new Button("Add");
-        sub = new Button("Sub");
-        mul = new Button("Mul");
-        div = new Button("Div");
+        b1 = new Button("Add");
+        b2= new Button("Sub");
+        b3 = new Button("Mul");
+        b4 = new Button("Div");
 
-        add(add);
-        add(sub);
-        add(mul);
-        add(div);
+        add(b1);
+        add(b2);
+        add(b3);
+        add(b4);
 
         result = new Label("Result:");
         add(result);
         
-        add.addActionListener(this);
-        sub.addActionListener(this);
-        mul.addActionListener(this);
-        div.addActionListener(this);   
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);   
     }
     public void actionPerformed(ActionEvent e){
         double a = Double.parseDouble(t1.getText());
         double b = Double.parseDouble(t2.getText());
         double c = 0;
 
-        if(e.getSource()==add){
+        if(e.getSource()==b1){
             c=a+b;
         }
-        else if(e.getSource()==sub){
+        else if(e.getSource()==b2){
             c=a-b;
         }
-        else if(e.getSource()==mul){
+        else if(e.getSource()==b3){
             c=a*b;
         }
-        else if(e.getSource()==div){
+        else if(e.getSource()==b4){
             c=a/b;
         }
     result.setText("Result:"+c);
