@@ -1,0 +1,83 @@
+
+import mysql.connector
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password=""
+)
+
+cursor = conn.cursor()
+
+cursor.execute("CREATE DATABASE IF NOT EXISTS test_db")
+cursor.execute("USE test_db")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT
+)
+""")
+
+while True:
+    print("\n=== MYSQL CRUD MENU ===")
+    print("1. CREATE")
+    print("2. READ")
+    print("3. UPDATE")
+    print("4. DELETE")
+    print("5. EXIT")
+
+    ch = input("Enter choice: ")
+
+    if ch == "1":
+        name = input("Enter name: ")
+        age = int(input("Enter age: "))
+
+        cursor.execute(
+            "INSERT INTO users (name, age) VALUES (%s, %s)",
+            (name, age)
+        )
+        conn.commit()
+        print("User added successfully!")
+
+    elif ch == "2":
+        cursor.execute("SELECT * FROM users")
+        rows = cursor.fetchall()
+
+        for r in rows:
+            print("ID:", r[0], "Name:", r[1], "Age:", r[2])
+
+        if not rows:
+            print("No users found.")
+
+    elif ch == "3":
+        uid = int(input("Enter user ID: "))
+        age = int(input("Enter new age: "))
+
+        cursor.execute(
+            "UPDATE users SET age=%s WHERE id=%s",
+            (age, uid)
+        )
+        conn.commit()
+        print("User updated successfully!")
+
+    elif ch == "4":
+        uid = int(input("Enter user ID: "))
+
+        cursor.execute(
+            "DELETE FROM users WHERE id=%s",
+            (uid,)
+        )
+        conn.commit()
+        print("User deleted successfully!")
+
+    elif ch == "5":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice!")
+
+cursor.close()
+conn.close()
