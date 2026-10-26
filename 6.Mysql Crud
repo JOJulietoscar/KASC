@@ -81,3 +81,42 @@ while True:
 
 cursor.close()
 conn.close()
+
+
+
+
+
+
+
+import mysql.connector
+
+con = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="college"
+)
+
+cur = con.cursor()
+
+cur.execute("CREATE TABLE IF NOT EXISTS student(id INT, name VARCHAR(20))")
+
+# Insert
+cur.execute("INSERT INTO student VALUES(1,'Arun')")
+con.commit()
+
+# Display
+cur.execute("SELECT * FROM student")
+print("Records:", cur.fetchall())
+
+# Update
+cur.execute("UPDATE student SET name='Kumar' WHERE id=1")
+con.commit()
+
+# Delete
+cur.execute("DELETE FROM student WHERE id=1")
+con.commit()
+
+print("CRUD Operations Completed")
+
+con.close()
