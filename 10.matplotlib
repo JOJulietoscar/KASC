@@ -1,0 +1,56 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = {
+    "Student": ["A", "B", "C", "D", "E"],
+    "Marks": [80, 65, 90, 75, 85],
+    "Hours": [5, 3, 6, 4, 5]
+}
+
+
+df = pd.DataFrame(data)
+
+print("Dataset:")
+print(df)
+
+
+plt.figure(figsize=(10,8))
+
+
+plt.subplot(2,2,1)
+plt.scatter(df["Hours"], df["Marks"], color="red", s=100)
+plt.title("Scatter Plot")
+plt.xlabel("Study Hours")
+plt.ylabel("Marks")
+plt.grid(True)
+
+
+plt.subplot(2,2,2)
+plt.plot(df["Student"], df["Marks"], marker="o", linewidth=2)
+plt.title("Line Plot")
+plt.xlabel("Student")
+plt.ylabel("Marks")
+plt.grid(True)
+
+
+plt.subplot(2,2,3)
+plt.bar(df["Student"], df["Marks"], color="orange")
+plt.title("Bar Chart")
+plt.xlabel("Student")
+plt.ylabel("Marks")
+plt.grid(True)
+
+
+plt.subplot(2,2,4)
+plt.hist(df["Marks"], bins=5, color="purple", edgecolor="black")
+plt.title("Histogram")
+plt.xlabel("Marks")
+plt.ylabel("Frequency")
+plt.grid(True)
+
+
+plt.tight_layout()
+
+
+plt.show()
+
