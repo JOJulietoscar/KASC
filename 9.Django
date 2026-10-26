@@ -1,0 +1,32 @@
+pip install django
+django-admin --version
+D:
+cd D:\
+mkdir DjangoPrograms
+cd DjangoPrograms
+django-admin startproject MyProject
+cd MyProject
+
+python manage.py runserver
+
+python manage.py startapp myapp
+
+MyProject/settings.py -add 'myapp',
+
+myapp/views.py
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to Django!")
+
+MyProject/urls.py
+from django.contrib import admin
+from django.urls import path
+from myapp import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home),
+]
+
+python manage.py runserver
