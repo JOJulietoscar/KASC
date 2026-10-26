@@ -1,0 +1,18 @@
+import re
+
+with open("sample.txt", "r") as f:
+    text = f.read()
+
+    phone_pattern = r"\+91\d{10}"
+    email_pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+
+    phone_numbers = re.findall(phone_pattern, text)
+    email_addresses = re.findall(email_pattern, text)
+
+    print("\nPhone numbers Found")
+    for phone in phone_numbers:
+        print(phone)
+
+    print("\nEmail Addresses Found")
+    for email in email_addresses:
+        print(email)
