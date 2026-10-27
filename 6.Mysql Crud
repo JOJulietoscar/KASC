@@ -117,6 +117,55 @@ con.commit()
 cur.execute("DELETE FROM student WHERE id=1")
 con.commit()
 
+
+
+
+
+
+
+import mysql.connector
+
+# Connect to MySQL
+con = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password=""
+)
+
+cur = con.cursor()
+
+# Create Database
+cur.execute("CREATE DATABASE IF NOT EXISTS colleges")
+cur.execute("USE colleges")
+
+# Create Table
+cur.execute("CREATE TABLE IF NOT EXISTS student(id INT, name VARCHAR(20))")
+
+# Insert
+cur.execute("INSERT INTO student VALUES(1,'Arun')")
+con.commit()
+
+# Display
+cur.execute("SELECT * FROM student")
+print("Records:", cur.fetchall())
+
+# Update
+cur.execute("UPDATE student SET name='Kumar' WHERE id=1")
+con.commit()
+
+# Display Updated Record
+cur.execute("SELECT * FROM student")
+print("After Update:", cur.fetchall())
+
+# Delete
+cur.execute("DELETE FROM student WHERE id=1")
+con.commit()
+
+print("CRUD Operations Completed")
+
+con.close()
+
+
 print("CRUD Operations Completed")
 
 con.close()
